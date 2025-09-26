@@ -1538,6 +1538,8 @@ body {
     }
 }
 
+/* Additional mobile responsive styles */
+@media (max-width: 768px) {
     .hero-stats {
         flex-direction: row;
         gap: 20px;
