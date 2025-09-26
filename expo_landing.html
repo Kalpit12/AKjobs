@@ -353,11 +353,17 @@
                 margin: 5% auto !important;
                 max-height: 90vh !important;
                 overflow-y: auto !important;
+                min-height: 90vh !important;
+            }
+            
+            .modal-animated-bg {
+                min-height: 100% !important;
+                height: 100% !important;
             }
             
         .role-selection {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
         }
         
         /* Animated Modal Background */
@@ -372,6 +378,7 @@
             overflow: hidden;
             z-index: 0;
             opacity: 1;
+            min-height: 100%;
         }
         
         .floating-shapes {
@@ -476,7 +483,7 @@
         /* Role Selection Grid */
         .role-selection {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             margin-bottom: 24px;
         }
@@ -533,6 +540,40 @@
             font-size: 0.85rem;
             color: var(--text-secondary);
             line-height: 1.4;
+        }
+        
+        /* Selected Role Display */
+        .selected-role-display {
+            margin-bottom: 20px;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .selected-role-card {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .selected-role-icon {
+            font-size: 1.5rem;
+        }
+        
+        .selected-role-text {
+            font-size: 1rem;
+        }
+        
+        /* Role selection styling */
+        .role-option input[type="radio"]:checked + label {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
         
         /* Dynamic Fields Animation */
@@ -1139,11 +1180,11 @@
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="250">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="250" data-role="trainer">
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-chalkboard-teacher"></i></div>
                     <div>
-                        <h3 class="role-title">Trainer / Consultant</h3>
+                        <h3 class="role-title">Trainers / Consultants</h3>
                         <p class="role-subtitle">Monetize and scale your expertise</p>
                     </div>
                 </div>
@@ -1155,11 +1196,11 @@
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="300" data-role="intern">
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="fas fa-user-graduate"></i></div>
                     <div>
-                        <h3 class="role-title">Intern</h3>
+                        <h3 class="role-title">Interns</h3>
                         <p class="role-subtitle">Explore careers and build experience</p>
                     </div>
                 </div>
@@ -1171,11 +1212,11 @@
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="350">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="350" data-role="community">
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="fas fa-users"></i></div>
                     <div>
-                        <h3 class="role-title">Community Member</h3>
+                        <h3 class="role-title">Communities</h3>
                         <p class="role-subtitle">Network, learn and collaborate</p>
                     </div>
                 </div>
@@ -1184,6 +1225,23 @@
                     <li>Events, resources and knowledge sharing</li>
                     <li>Collaboration and project opportunities</li>
                     <li>Global and Kenya-based communities</li>
+                </ul>
+            </div>
+
+            <div class="role-card" data-aos="fade-up" data-aos-delay="400" data-role="university">
+                <div class="role-header">
+                    <div class="role-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"><i class="fas fa-university"></i></div>
+                    <div>
+                        <h3 class="role-title">Universities</h3>
+                        <p class="role-subtitle">Connect students with opportunities</p>
+                    </div>
+                </div>
+                <ul class="benefits-list">
+                    <li>Student placement and career services</li>
+                    <li>Industry partnership opportunities</li>
+                    <li>Alumni network integration</li>
+                    <li>Research collaboration platforms</li>
+                    <li>Graduate employment tracking</li>
                 </ul>
             </div>
         </div>
@@ -1839,14 +1897,30 @@
                             <input type="radio" id="community" name="role" value="community" required>
                             <label for="community">
                                 <i class="fas fa-users"></i>
-                                <h3>Community</h3>
+                                <h3>Communities</h3>
                                 <p>Join our growing professional network</p>
+                            </label>
+                        </div>
+                        <div class="role-option">
+                            <input type="radio" id="university" name="role" value="university" required>
+                            <label for="university">
+                                <i class="fas fa-university"></i>
+                                <h3>Universities</h3>
+                                <p>Connect students with opportunities</p>
                             </label>
                         </div>
                     </div>
                     
                     <!-- Dynamic form fields based on role selection -->
                     <div class="dynamic-fields" id="dynamicFields">
+                        <!-- Selected Role Display -->
+                        <div class="selected-role-display" id="selectedRoleDisplay" style="display: none;">
+                            <div class="selected-role-card">
+                                <i class="selected-role-icon"></i>
+                                <span class="selected-role-text">Selected: <strong></strong></span>
+                            </div>
+                        </div>
+                        
                         <!-- Common fields for all roles -->
                         <div class="form-group">
                             <input type="text" id="regName" name="name" placeholder="Full Name" required>
@@ -2013,6 +2087,29 @@
                                     <option value="ambassador">Ambassador</option>
                                     <option value="moderator">Moderator</option>
                                 </select>
+                            </div>
+                        </div>
+                        
+                        <!-- University specific fields -->
+                        <div class="role-specific-fields" id="universityFields" style="display: none;">
+                            <div class="form-group">
+                                <input type="text" id="regUniversityName" name="universityName" placeholder="University/Institution Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="regDepartment" name="department" placeholder="Department/Program">
+                            </div>
+                            <div class="form-group">
+                                <select id="regUniversityType" name="universityType">
+                                    <option value="">Type of Institution</option>
+                                    <option value="public">Public University</option>
+                                    <option value="private">Private University</option>
+                                    <option value="college">College</option>
+                                    <option value="technical">Technical Institute</option>
+                                    <option value="vocational">Vocational School</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="regStudentCount" name="studentCount" placeholder="Approximate Student Population">
                             </div>
                         </div>
                     </div>
