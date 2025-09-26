@@ -337,6 +337,20 @@ async function sendRegistration(data) {
 document.addEventListener('DOMContentLoaded', function() {
     const roleInputs = document.querySelectorAll('input[name="role"]');
     const roleSpecificFields = document.querySelectorAll('.role-specific-fields');
+    const selectedRoleDisplay = document.getElementById('selectedRoleDisplay');
+    const selectedRoleIcon = document.querySelector('.selected-role-icon');
+    const selectedRoleText = document.querySelector('.selected-role-text strong');
+    
+    // Role mapping for display
+    const roleMapping = {
+        'job_seeker': { name: 'Job Seekers', icon: 'fas fa-user' },
+        'recruiter': { name: 'Recruiters', icon: 'fas fa-briefcase' },
+        'mentor': { name: 'Mentors', icon: 'fas fa-graduation-cap' },
+        'trainer': { name: 'Trainers/Consultants', icon: 'fas fa-chalkboard-teacher' },
+        'intern': { name: 'Interns', icon: 'fas fa-user-graduate' },
+        'community': { name: 'Communities', icon: 'fas fa-users' },
+        'university': { name: 'Universities', icon: 'fas fa-university' }
+    };
     
     roleInputs.forEach(input => {
         input.addEventListener('change', function() {
@@ -350,6 +364,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetFields = document.getElementById(selectedRole + 'Fields');
             if (targetFields) {
                 targetFields.style.display = 'block';
+            }
+            
+            // Update selected role display
+            if (selectedRoleDisplay && roleMapping[selectedRole]) {
+                const roleInfo = roleMapping[selectedRole];
+                selectedRoleIcon.className = `selected-role-icon ${roleInfo.icon}`;
+                selectedRoleText.textContent = roleInfo.name;
+                selectedRoleDisplay.style.display = 'block';
             }
         });
     });
