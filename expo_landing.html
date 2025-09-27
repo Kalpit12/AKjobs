@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AksharJobs - AI-Powered Job Portal | Expo 2025</title>
+    <title>AksharJobs - AI-Powered Job Portal</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -13,7 +13,7 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Revolutionary AI-powered job matching platform launching October 7th, 2025. Multilingual support, cultural intelligence, and 75.3% accuracy. Join the waitlist for early access!">
-    <meta name="keywords" content="AI job matching, Local and Global jobs , multilingual recruitment, cultural intelligence, job portal, career opportunities, AksharJobs, Expo 2025">
+    <meta name="keywords" content="AI job matching, Local and Global jobs , multilingual recruitment, cultural intelligence, job portal, career opportunities, AksharJobs">
     <meta name="author" content="AksharJobs">
     <meta name="robots" content="index, follow">
     
@@ -137,7 +137,7 @@
             display: flex !important;
             gap: 24px !important;
             margin-bottom: 48px !important;
-            justify-content: flex-start !important;
+            justify-content: center !important;
             flex-wrap: wrap !important;
         }
         
@@ -298,7 +298,7 @@
                 margin-bottom: 32px !important;
                 flex-direction: row !important;
                 align-items: center !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
                 flex-wrap: wrap !important;
             }
             
@@ -652,7 +652,7 @@
             .hero-stats {
                 gap: 16px !important;
                 flex-wrap: wrap !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
             }
             
             .stat-item {
@@ -730,17 +730,17 @@
             }
         }
         /* Roles section */
-        .roles-section { padding: 80px 0; background: #f8fafc; }
+        .roles-section { padding: 60px 0; background: #f8fafc; }
         .roles-section .section-header { text-align: center; margin-bottom: 32px; }
-        .roles-section .section-header h2 { font-size: 2rem; font-weight: 800; margin: 0 0 8px; }
+        .roles-section .section-header h2 { font-size: 1.8rem; font-weight: 800; margin: 0 0 8px; }
         .roles-section .section-header .section-subtitle { color: var(--text-secondary); }
-        .role-card { background: #fff; border-radius: 16px; padding: 30px; box-shadow: var(--shadow-lg); margin-bottom: 24px; }
-        .role-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .role-icon { width: 64px; height: 64px; border-radius: 14px; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; }
-        .role-title { margin: 0; font-size: 1.5rem; font-weight: 700; }
-        .role-subtitle { margin: 4px 0 0; color: var(--text-secondary); }
+        .role-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: var(--shadow-lg); margin-bottom: 20px; }
+        .role-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .role-icon { width: 50px; height: 50px; border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+        .role-title { margin: 0; font-size: 1.3rem; font-weight: 700; }
+        .role-subtitle { margin: 4px 0 0; color: var(--text-secondary); font-size: 0.9rem; }
         .benefits-list { list-style: none; padding: 0; margin: 0; }
-        .benefits-list li { position: relative; padding-left: 26px; margin: 10px 0; color: var(--text-primary); }
+        .benefits-list li { position: relative; padding-left: 24px; margin: 8px 0; color: var(--text-primary); font-size: 0.9rem; }
         .benefits-list li:before { content: "\2713"; position: absolute; left: 0; top: 0; color: #10b981; font-weight: 700; }
         
         /* Sticky CTA Bar */
@@ -858,7 +858,7 @@
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             z-index: 1000;
             animation: pulse 2s infinite;
         }
@@ -884,6 +884,49 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+        }
+        
+        /* Scroll Up Arrow */
+        .scroll-up-arrow {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .scroll-up-arrow.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-up-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .scroll-up-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .scroll-up-btn.animate {
+            animation: bounce 2s infinite;
         }
         
         /* Referral Program */
@@ -951,22 +994,59 @@
             .countdown-timer {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 8px;
+                margin: 15px 0;
             }
             .countdown-item {
-                min-width: 60px;
-                padding: 10px 15px;
+                min-width: 65px;
+                padding: 12px 8px;
+                flex: 1;
+                max-width: 80px;
             }
             .countdown-number {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+            .countdown-label {
+                font-size: 0.7rem;
+                margin-top: 4px;
             }
             .whatsapp-float {
                 bottom: 20px;
-                right: 20px;
+                left: 20px;
             }
             .whatsapp-btn {
                 width: 50px;
                 height: 50px;
                 font-size: 1.5rem;
+            }
+            .scroll-up-arrow {
+                bottom: 20px;
+                right: 20px;
+            }
+            .scroll-up-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            /* Additional mobile optimizations */
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 16px;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 32px;
+            }
+            
+            .container {
+                padding: 0 16px;
             }
         }
     </style>
@@ -988,7 +1068,7 @@
                 <a href="#roles" class="nav-link">Roles</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <button class="nav-cta" onclick="openRegistrationModal()">Get Started</button>
+                <a href="registration.html" class="nav-cta">Get Started</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
@@ -1005,8 +1085,8 @@
                 🚀 Join 100+ professionals already on AksharJobs! Limited early access spots available.
             </div>
             <div class="sticky-cta-buttons">
-                <a href="#contact" class="sticky-cta-btn">Learn More</a>
-                <button class="sticky-cta-btn primary" onclick="openRegistrationModal()">Get Early Access</button>
+                <a href="#contact" class="sticky-cta-btn">Get In Touch</a>
+                <a href="registration.html" class="sticky-cta-btn primary">Get Early Access</a>
             </div>
         </div>
     </div>
@@ -1017,9 +1097,9 @@
             <div class="hero-particles" id="particles"></div>
         </div>
         <div class="hero-container">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000" style="padding-top: 80px; position: relative; z-index: 10; filter: none; backdrop-filter: none;">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000" style="padding-top: 80px; position: relative; z-index: 10; filter: none; backdrop-filter: none; text-align: center;">
                 <h1 class="hero-title">
-                    AI-Powered Job Portal
+                   Free AI-Powered Job Network
                 </h1>
                 <p class="hero-subtitle">
                     Revolutionizing recruitment with advanced AI, multilingual support, and cultural intelligence 
@@ -1049,7 +1129,7 @@
                 
                 <div class="hero-stats">
                     <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number">90%</div>
+                        <div class="stat-number">95%</div>
                         <div class="stat-label">AI Accuracy</div>
                     </div>
                     <div class="stat-item" data-aos="fade-up" data-aos-delay="600">
@@ -1058,61 +1138,55 @@
                     </div>
                 </div>
                 <div class="hero-buttons" data-aos="fade-up" data-aos-delay="800">
-                    <button class="btn-primary" onclick="openRegistrationModal()">
+                    <a href="registration.html" class="btn-primary">
                         <i class="fas fa-rocket"></i>
-                        Start Your Journey
-                    </button>
-                </div>
-                
-                <!-- Social Share Buttons -->
-                <div class="social-share" data-aos="fade-up" data-aos-delay="1000">
-                    <a href="#" class="social-share-btn twitter" onclick="shareOnTwitter()">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-share-btn linkedin" onclick="shareOnLinkedIn()">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="social-share-btn whatsapp" onclick="shareOnWhatsApp()">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="#" class="social-share-btn facebook" onclick="shareOnFacebook()">
-                        <i class="fab fa-facebook"></i>
+                        Start Your Journey Now
                     </a>
                 </div>
             </div>
             <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200">
                 <div class="floating-cards">
                     <div class="card card-1" onclick="scrollToRole('job-seeker')">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-search"></i>
                         <span>Job Seekers</span>
                         <small>Find your dream job with AI matching</small>
                     </div>
                     <div class="card card-2" onclick="scrollToRole('recruiter')">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="fas fa-user-tie"></i>
                         <span>Recruiters</span>
                         <small>Find top talent with advanced AI</small>
                     </div>
                     <div class="card card-3" onclick="scrollToRole('mentor')">
-                        <i class="fas fa-graduation-cap"></i>
+                        <i class="fas fa-lightbulb"></i>
                         <span>Mentors</span>
                         <small>Guide and inspire talent</small>
                     </div>
                     <div class="card card-4" onclick="scrollToRole('trainer')">
                         <i class="fas fa-chalkboard-teacher"></i>
-                        <span>Trainers/Consultants</span>
+                        <span>Trainers</span>
                         <small>Share your expertise</small>
                     </div>
-                    <div class="card card-5" onclick="scrollToRole('intern')">
-                        <i class="fas fa-user-graduate"></i>
+                    <div class="card card-5" onclick="scrollToRole('consultant')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Consultants</span>
+                        <small>Provide strategic guidance</small>
+                    </div>
+                    <div class="card card-6" onclick="scrollToRole('volunteer')">
+                        <i class="fas fa-heart"></i>
+                        <span>Volunteers</span>
+                        <small>Make a difference</small>
+                    </div>
+                    <div class="card card-7" onclick="scrollToRole('intern')">
+                        <i class="fas fa-graduation-cap"></i>
                         <span>Interns</span>
                         <small>Gain valuable experience</small>
                     </div>
-                    <div class="card card-6" onclick="scrollToRole('community')">
+                    <div class="card card-8" onclick="scrollToRole('community')">
                         <i class="fas fa-users"></i>
                         <span>Communities</span>
                         <small>Network and collaborate</small>
                     </div>
-                    <div class="card card-7" onclick="scrollToRole('university')">
+                    <div class="card card-9" onclick="scrollToRole('university')">
                         <i class="fas fa-university"></i>
                         <span>Universities</span>
                         <small>Connect students with opportunities</small>
@@ -1132,7 +1206,7 @@
 
             <div class="role-card" data-aos="fade-up" data-aos-delay="100" data-role="job-seeker">
                 <div class="role-header">
-                    <div class="role-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><i class="fas fa-user"></i></div>
+                    <div class="role-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"><i class="fas fa-search"></i></div>
                     <div>
                         <h3 class="role-title">Job Seekers</h3>
                         <p class="role-subtitle">AI-powered matching and career growth</p>
@@ -1140,7 +1214,7 @@
                 </div>
                 <ul class="benefits-list">
                     <li>Smart matching to relevant jobs based on skills and experience</li>
-                    <li>Multilingual resume support (Swahili, Sheng, English)</li>
+                    <li>Multilingual resume support (Swahili, English)</li>
                     <li>Real-time alerts for new opportunities</li>
                     <li>Interview prep and profile improvement tips</li>
                     <li>Mobile-first experience on all devices</li>
@@ -1149,7 +1223,7 @@
 
             <div class="role-card" data-aos="fade-up" data-aos-delay="150" data-role="recruiter">
                 <div class="role-header">
-                    <div class="role-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-briefcase"></i></div>
+                    <div class="role-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-user-tie"></i></div>
                     <div>
                         <h3 class="role-title">Recruiters</h3>
                         <p class="role-subtitle">Find top talent faster with AI</p>
@@ -1166,7 +1240,7 @@
 
             <div class="role-card" data-aos="fade-up" data-aos-delay="200" data-role="mentor">
                 <div class="role-header">
-                    <div class="role-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="role-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"><i class="fas fa-lightbulb"></i></div>
                     <div>
                         <h3 class="role-title">Mentors</h3>
                         <p class="role-subtitle">Guide and inspire talent</p>
@@ -1184,21 +1258,57 @@
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-chalkboard-teacher"></i></div>
                     <div>
-                        <h3 class="role-title">Trainers / Consultants</h3>
-                        <p class="role-subtitle">Monetize and scale your expertise</p>
+                        <h3 class="role-title">Trainers</h3>
+                        <p class="role-subtitle">Share knowledge and build skills</p>
                     </div>
                 </div>
                 <ul class="benefits-list">
                     <li>Create and publish training programs</li>
-                    <li>Manage learners and certifications</li>
-                    <li>Analytics on outcomes and engagement</li>
-                    <li>Marketplace visibility to reach clients</li>
+                    <li>Manage learners and track progress</li>
+                    <li>Issue certificates and credentials</li>
+                    <li>Analytics on learning outcomes and engagement</li>
+                    <li>Marketplace visibility to reach students</li>
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="300" data-role="intern">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="275" data-role="consultant">
                 <div class="role-header">
-                    <div class="role-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="fas fa-user-graduate"></i></div>
+                    <div class="role-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <h3 class="role-title">Consultants</h3>
+                        <p class="role-subtitle">Provide strategic guidance and expertise</p>
+                    </div>
+                </div>
+                <ul class="benefits-list">
+                    <li>Connect with clients seeking specialized expertise</li>
+                    <li>Project management and collaboration tools</li>
+                    <li>Secure communication and file sharing</li>
+                    <li>Performance tracking and client feedback</li>
+                    <li>Professional network and referral system</li>
+                </ul>
+            </div>
+
+            <div class="role-card" data-aos="fade-up" data-aos-delay="300" data-role="volunteer">
+                <div class="role-header">
+                    <div class="role-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-heart"></i></div>
+                    <div>
+                        <h3 class="role-title">Volunteers</h3>
+                        <p class="role-subtitle">Make a positive impact in your community</p>
+                    </div>
+                </div>
+                <ul class="benefits-list">
+                    <li>Connect with meaningful volunteer opportunities</li>
+                    <li>Track volunteer hours and impact</li>
+                    <li>Build skills through hands-on experience</li>
+                    <li>Network with like-minded professionals</li>
+                    <li>Receive recognition and certificates</li>
+                    <li>Access to exclusive volunteer events</li>
+                </ul>
+            </div>
+
+            <div class="role-card" data-aos="fade-up" data-aos-delay="325" data-role="intern">
+                <div class="role-header">
+                    <div class="role-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="fas fa-graduation-cap"></i></div>
                     <div>
                         <h3 class="role-title">Interns</h3>
                         <p class="role-subtitle">Explore careers and build experience</p>
@@ -1212,7 +1322,7 @@
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="350" data-role="community">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="375" data-role="community">
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="fas fa-users"></i></div>
                     <div>
@@ -1228,7 +1338,7 @@
                 </ul>
             </div>
 
-            <div class="role-card" data-aos="fade-up" data-aos-delay="400" data-role="university">
+            <div class="role-card" data-aos="fade-up" data-aos-delay="425" data-role="university">
                 <div class="role-header">
                     <div class="role-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"><i class="fas fa-university"></i></div>
                     <div>
@@ -1254,12 +1364,25 @@
         </a>
     </div>
 
+    <!-- Scroll Up Arrow -->
+    <div class="scroll-up-arrow" id="scrollUpArrow">
+        <button class="scroll-up-btn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
     <!-- Referral Program Section -->
-    <section class="referral-section">
+    <section id="referral" class="referral-section">
         <div class="container">
             <div class="referral-card" data-aos="fade-up">
                 <h3 style="margin: 0 0 16px; font-size: 1.8rem; color: var(--primary-color);">🎯 Referral Program</h3>
                 <p style="margin-bottom: 20px; color: var(--text-secondary);">Invite friends and get exclusive benefits!</p>
+                
+                <!-- Welcome message for new registrations -->
+                <div id="welcomeMessage" style="display: none; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                    <h4 style="margin: 0 0 8px; font-size: 1.1rem;">🎉 Welcome to AksharJobs!</h4>
+                    <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">You're now part of our exclusive community. Start referring friends to earn rewards!</p>
+                </div>
                 
                 <div class="referral-stats">
                     <div class="referral-stat">
@@ -1279,12 +1402,50 @@
                 <div class="referral-code" onclick="copyReferralCode()" id="referralCode">
                     AKSHAR2025
                 </div>
-                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 10px 0;">Click to copy your referral code</p>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 10px 0;">Click to copy your referral code (+1 coin)</p>
                 
-                <button class="btn-primary" onclick="openRegistrationModal()" style="margin-top: 15px;">
+                <div class="coin-balance-display" style="margin: 16px 0;">
+                    <span class="coin-icon">🪙</span>
+                    <span class="coin-text">Your AksharCoins: <span class="akshar-coins-display">0</span></span>
+                </div>
+                
+                <div id="registrationStatus" class="registration-status" style="display: none;">
+                    <div class="status-indicator">
+                        <span class="status-icon">✅</span>
+                        <span class="status-text">Registered & Verified</span>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" onclick="showReferralSharingModal()" style="margin-top: 15px;">
                     <i class="fas fa-share-alt"></i>
                     Start Referring
                 </button>
+                
+                <!-- QR Code Registration Section -->
+                <div class="qr-registration-section" style="margin-top: 30px; text-align: center;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px;">📱 Quick Registration</h3>
+                    <div class="qr-code-container">
+                        <div class="qr-code-display" id="qrCodeDisplay">
+                            <div class="qr-placeholder">
+                                <i class="fas fa-qrcode" style="font-size: 3rem; color: #667eea; margin-bottom: 10px;"></i>
+                                <p>QR Code will appear here</p>
+                            </div>
+                        </div>
+                        <div class="qr-instructions">
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 10px 0;">
+                                Scan with your phone camera to register instantly
+                            </p>
+                            <button class="btn-secondary" onclick="generateQRCode()" style="margin: 5px;">
+                                <i class="fas fa-sync-alt"></i>
+                                Generate QR Code
+                            </button>
+                            <button class="btn-secondary" onclick="downloadQRCode()" style="margin: 5px;">
+                                <i class="fas fa-download"></i>
+                                Download QR
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1300,60 +1461,57 @@
             <!-- AI & ML Features -->
             <div class="feature-category" data-aos="fade-up">
                 <h3 class="category-title">🤖 AI & Machine Learning</h3>
-                <div class="features-grid">
-                    <div class="feature-card large-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
+                <div class="compact-features-grid">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h3>Fine-Tuned SBERT Model</h3>
-                        <p class="feature-description">
-                            Our proprietary Fine-tuned SBERT model achieves 75.3% accuracy in job-resume matching, 
-                            outperforming industry standards by 15%. This advanced AI understands semantic meaning 
-                            beyond keyword matching.
-                        </p>
-                        <div class="feature-stats">
-                            <div class="stat">
-                                <span class="stat-number">75.3%</span>
-                                <span class="stat-label">Accuracy Rate</span>
+                        <div class="compact-feature-content">
+                            <h4>Fine-Tuned SBERT Model</h4>
+                            <p>75.3% accuracy in job-resume matching, outperforming industry standards by 15%</p>
+                            <div class="compact-stats">
+                                <span class="compact-stat">75.3%</span>
+                                <span class="compact-stat">0.0068 MSE</span>
                             </div>
-                            <div class="stat">
-                                <span class="stat-number">0.0068</span>
-                                <span class="stat-label">MSE Score</span>
-                            </div>
+                            <div class="compact-highlight">Industry Leading</div>
                         </div>
-                        <div class="feature-highlight">Industry Leading</div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-robot"></i>
                         </div>
-                        <h3>Intelligent Resume Parsing</h3>
-                        <p>Advanced AI extracts structured data from PDF/DOCX resumes using Google Gemini API</p>
-                        <ul class="feature-list">
-                            <li>Skills extraction</li>
-                            <li>Education parsing</li>
-                            <li>Experience analysis</li>
-                            <li>Contact information</li>
-                        </ul>
+                        <div class="compact-feature-content">
+                            <h4>Intelligent Resume Parsing</h4>
+                            <p>Advanced AI extracts structured data from PDF/DOCX resumes using Google Gemini API</p>
+                            <div class="compact-features">
+                                <span class="compact-feature-tag">Skills</span>
+                                <span class="compact-feature-tag">Education</span>
+                                <span class="compact-feature-tag">Experience</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>Semantic Similarity Matching</h3>
-                        <p>Goes beyond keyword matching to understand context and meaning in job descriptions and resumes</p>
-                        <div class="feature-highlight">Context-Aware</div>
+                        <div class="compact-feature-content">
+                            <h4>Semantic Similarity Matching</h4>
+                            <p>Goes beyond keyword matching to understand context and meaning in job descriptions</p>
+                            <div class="compact-highlight">Context-Aware</div>
+                        </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h3>AI Improvement Suggestions</h3>
-                        <p>Personalized recommendations to help job seekers improve their profiles and applications</p>
-                        <div class="feature-highlight">Personalized</div>
+                        <div class="compact-feature-content">
+                            <h4>AI Improvement Suggestions</h4>
+                            <p>Personalized recommendations to help job seekers improve their profiles and applications</p>
+                            <div class="compact-highlight">Personalized</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1361,73 +1519,61 @@
             <!-- Multilingual & Cultural Features -->
             <div class="feature-category" data-aos="fade-up">
                 <h3 class="category-title">🌍 Multilingual & Cultural Intelligence</h3>
-                <div class="features-grid">
-                    <div class="feature-card large-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
+                <div class="compact-features-grid">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-globe-africa"></i>
                         </div>
-                        <h3>Multilingual Resume Processing</h3>
-                        <p class="feature-description">
-                            Process resumes in Swahili, Sheng, local English, and other Kenyan languages. 
-                            Access 70% more talent that other platforms miss due to language barriers.
-                        </p>
-                        <div class="language-support">
-                            <div class="language-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Swahili Detection</span>
+                        <div class="compact-feature-content">
+                            <h4>Multilingual Resume Processing</h4>
+                            <p>Process resumes in Swahili, Sheng, local English, and other Kenyan languages</p>
+                            <div class="compact-stats">
+                                <span class="compact-stat">70% More Talent</span>
                             </div>
-                            <div class="language-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Sheng Recognition</span>
+                            <div class="compact-features">
+                                <span class="compact-feature-tag">Swahili</span>
+                                <span class="compact-feature-tag">Sheng</span>
+                                <span class="compact-feature-tag">Local English</span>
                             </div>
-                            <div class="language-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Local English</span>
-                            </div>
-                            <div class="language-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Cultural Context</span>
-                            </div>
+                            <div class="compact-highlight">Unique Feature</div>
                         </div>
-                        <div class="feature-stats">
-                            <div class="stat">
-                                <span class="stat-number">70%</span>
-                                <span class="stat-label">More Talent Access</span>
-                            </div>
-                        </div>
-                        <div class="feature-highlight">Unique Feature</div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <h3>Cultural Intelligence</h3>
-                        <p>Understand Kenyan business culture, community dynamics, and local market preferences</p>
-                        <ul class="feature-list">
-                            <li>Community service detection</li>
-                            <li>Local business understanding</li>
-                            <li>Cultural fit assessment</li>
-                            <li>Network analysis</li>
-                        </ul>
+                        <div class="compact-feature-content">
+                            <h4>Cultural Intelligence</h4>
+                            <p>Understand Kenyan business culture, community dynamics, and local market preferences</p>
+                            <div class="compact-features">
+                                <span class="compact-feature-tag">Community Service</span>
+                                <span class="compact-feature-tag">Local Business</span>
+                                <span class="compact-feature-tag">Cultural Fit</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <h3>Local Market Expertise</h3>
-                        <p>Analyze formal vs informal sector experience and local business networks</p>
-                        <div class="feature-highlight">Local Focus</div>
+                        <div class="compact-feature-content">
+                            <h4>Local Market Expertise</h4>
+                            <p>Analyze formal vs informal sector experience and local business networks</p>
+                            <div class="compact-highlight">Local Focus</div>
+                        </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h3>Community Integration</h3>
-                        <p>Score candidates based on local network connections and community involvement</p>
-                        <div class="feature-highlight">Community-Focused</div>
+                        <div class="compact-feature-content">
+                            <h4>Community Integration</h4>
+                            <p>Score candidates based on local network connections and community involvement</p>
+                            <div class="compact-highlight">Community-Focused</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1435,67 +1581,58 @@
             <!-- Analytics & Insights -->
             <div class="feature-category" data-aos="fade-up">
                 <h3 class="category-title">📊 Analytics & Insights</h3>
-                <div class="features-grid">
-                    <div class="feature-card large-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
+                <div class="compact-features-grid">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-chart-pie"></i>
                         </div>
-                        <h3>Advanced Analytics Dashboard</h3>
-                        <p class="feature-description">
-                            Comprehensive visualizations including match distribution, application status tracking, 
-                            candidate comparisons, and diversity analytics for informed hiring decisions.
-                        </p>
-                        <div class="analytics-features">
-                            <div class="analytics-item">
-                                <i class="fas fa-chart-bar"></i>
-                                <span>Match Score Distribution</span>
+                        <div class="compact-feature-content">
+                            <h4>Advanced Analytics Dashboard</h4>
+                            <p>Comprehensive visualizations including match distribution, application status tracking, and diversity analytics</p>
+                            <div class="compact-features">
+                                <span class="compact-feature-tag">Match Distribution</span>
+                                <span class="compact-feature-tag">Status Tracking</span>
+                                <span class="compact-feature-tag">Diversity Analytics</span>
                             </div>
-                            <div class="analytics-item">
-                                <i class="fas fa-tasks"></i>
-                                <span>Application Status Tracking</span>
-                            </div>
-                            <div class="analytics-item">
-                                <i class="fas fa-balance-scale"></i>
-                                <span>Candidate Comparisons</span>
-                            </div>
-                            <div class="analytics-item">
-                                <i class="fas fa-users-cog"></i>
-                                <span>Diversity Analytics</span>
-                            </div>
+                            <div class="compact-highlight">Data-Driven</div>
                         </div>
-                        <div class="feature-highlight">Data-Driven</div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-percentage"></i>
                         </div>
-                        <h3>Match Score Visualization</h3>
-                        <p>Real-time calculation and visual representation of job-resume compatibility</p>
-                        <div class="score-categories">
-                            <div class="score-item excellent">80%+ : Excellent Match</div>
-                            <div class="score-item good">60-79%: Good Match</div>
-                            <div class="score-item fair">40-59%: Fair Match</div>
-                            <div class="score-item poor"><40%: Poor Match</div>
+                        <div class="compact-feature-content">
+                            <h4>Match Score Visualization</h4>
+                            <p>Real-time calculation and visual representation of job-resume compatibility</p>
+                            <div class="compact-stats">
+                                <span class="compact-stat">80%+ Excellent</span>
+                                <span class="compact-stat">60-79% Good</span>
+                            </div>
+                            <div class="compact-highlight">Real-Time</div>
                         </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
-                            <i class="fas fa-trending-up"></i>
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="compact-feature-icon">
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>Performance Metrics</h3>
-                        <p>Track hiring success rates, time-to-hire, and candidate satisfaction</p>
-                        <div class="feature-highlight">Performance Tracking</div>
+                        <div class="compact-feature-content">
+                            <h4>Performance Metrics</h4>
+                            <p>Track hiring success rates, time-to-hire, and candidate satisfaction</p>
+                            <div class="compact-highlight">Performance Tracking</div>
+                        </div>
                     </div>
 
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
+                    <div class="compact-feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="compact-feature-icon">
                             <i class="fas fa-file-export"></i>
                         </div>
-                        <h3>Export & Reporting</h3>
-                        <p>Generate detailed reports and export data for further analysis</p>
-                        <div class="feature-highlight">Export Ready</div>
+                        <div class="compact-feature-content">
+                            <h4>Export & Reporting</h4>
+                            <p>Generate detailed reports and export data for further analysis</p>
+                            <div class="compact-highlight">Export Ready</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1713,22 +1850,22 @@
                     <div class="global-impact">
                         <div class="impact-item">
                             <i class="fas fa-globe"></i>
-                            <span class="impact-number">50+</span>
+                            <span class="impact-number">5+</span>
                             <span class="impact-label">Countries</span>
                         </div>
                         <div class="impact-item">
                             <i class="fas fa-language"></i>
-                            <span class="impact-number">25+</span>
+                            <span class="impact-number">3+</span>
                             <span class="impact-label">Languages</span>
                         </div>
                         <div class="impact-item">
                             <i class="fas fa-users"></i>
-                            <span class="impact-number">1M+</span>
+                            <span class="impact-number">100+</span>
                             <span class="impact-label">Job Matches</span>
                         </div>
                         <div class="impact-item">
                             <i class="fas fa-chart-line"></i>
-                            <span class="impact-number">95%</span>
+                            <span class="impact-number">85%</span>
                             <span class="impact-label">Success Rate</span>
                         </div>
                     </div>
@@ -1758,7 +1895,7 @@
                         <i class="fas fa-phone"></i>
                         <div>
                             <h4>Call Us</h4>
-                            <p><a href="tel:+254735560563">+254 735560563</a></p>
+                            <p><a href="tel:+254735560563">+254 786658200</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1772,7 +1909,7 @@
                         <i class="fas fa-whatsapp"></i>
                         <div>
                             <h4>WhatsApp</h4>
-                            <p><a href="https://wa.me/254735560563" target="_blank">+254 735560563</a></p>
+                            <p><a href="https://wa.me/25478658200" target="_blank">+254 786658200</a></p>
                         </div>
                     </div>
                 </div>
@@ -1823,305 +1960,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 AksharJobs. All rights reserved. | Expo 2025</p>
+                <p>&copy; 2025 AksharJobs. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Registration Modal -->
-    <div id="registrationModal" class="modal">
-        <div class="modal-content">
-            <!-- Animated background -->
-            <div class="modal-animated-bg">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                    <div class="shape shape-4"></div>
-                    <div class="shape shape-5"></div>
-                    <div class="shape shape-6"></div>
-                    <div class="shape shape-7"></div>
-                    <div class="shape shape-8"></div>
-                    <div class="shape shape-9"></div>
-                </div>
-            </div>
-            <span class="close" onclick="closeRegistrationModal()">&times;</span>
-                    <div class="modal-header">
-                        <h2>Join AksharJobs at Expo 2025</h2>
-                        <p>Notify me when we launch - select your role to see relevant fields</p>
-                    </div>
-            <div class="modal-body">
-                <form id="registrationForm">
-                    <div class="role-selection">
-                        <div class="role-option">
-                            <input type="radio" id="jobSeeker" name="role" value="job_seeker" required>
-                            <label for="jobSeeker">
-                                <i class="fas fa-user"></i>
-                                <h3>Job Seeker</h3>
-                                <p>Find your dream job with AI-powered matching</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="recruiter" name="role" value="recruiter" required>
-                            <label for="recruiter">
-                                <i class="fas fa-briefcase"></i>
-                                <h3>Recruiter</h3>
-                                <p>Find the best talent with advanced AI tools</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="mentor" name="role" value="mentor" required>
-                            <label for="mentor">
-                                <i class="fas fa-graduation-cap"></i>
-                                <h3>Mentor</h3>
-                                <p>Guide and inspire the next generation</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="trainer" name="role" value="trainer" required>
-                            <label for="trainer">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                                <h3>Trainer/Consultant</h3>
-                                <p>Share your expertise and knowledge</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="intern" name="role" value="intern" required>
-                            <label for="intern">
-                                <i class="fas fa-user-graduate"></i>
-                                <h3>Intern</h3>
-                                <p>Gain valuable experience and skills</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="community" name="role" value="community" required>
-                            <label for="community">
-                                <i class="fas fa-users"></i>
-                                <h3>Communities</h3>
-                                <p>Join our growing professional network</p>
-                            </label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="university" name="role" value="university" required>
-                            <label for="university">
-                                <i class="fas fa-university"></i>
-                                <h3>Universities</h3>
-                                <p>Connect students with opportunities</p>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <!-- Dynamic form fields based on role selection -->
-                    <div class="dynamic-fields" id="dynamicFields">
-                        <!-- Selected Role Display -->
-                        <div class="selected-role-display" id="selectedRoleDisplay" style="display: none;">
-                            <div class="selected-role-card">
-                                <i class="selected-role-icon"></i>
-                                <span class="selected-role-text">Selected: <strong></strong></span>
-                            </div>
-                        </div>
-                        
-                        <!-- Common fields for all roles -->
-                        <div class="form-group">
-                            <input type="text" id="regName" name="name" placeholder="Full Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="regEmail" name="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" id="regPhone" name="phone" placeholder="Phone Number" required>
-                        </div>
-                        
-                        <!-- Job Seeker specific fields -->
-                        <div class="role-specific-fields" id="jobSeekerFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regExperience" name="experience" placeholder="Years of Experience">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regSkills" name="skills" placeholder="Key Skills (comma separated)">
-                            </div>
-                            <div class="form-group">
-                                <select id="regLocation" name="location">
-                                    <option value="">Select Preferred Location</option>
-                                    <option value="nairobi">Nairobi</option>
-                                    <option value="mombasa">Mombasa</option>
-                                    <option value="kisumu">Kisumu</option>
-                                    <option value="nakuru">Nakuru</option>
-                                    <option value="remote">Remote</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Recruiter specific fields -->
-                        <div class="role-specific-fields" id="recruiterFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regCompany" name="company" placeholder="Company Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regPosition" name="position" placeholder="Your Position">
-                            </div>
-                            <div class="form-group">
-                                <select id="regIndustry" name="industry">
-                                    <option value="">Select Industry</option>
-                                    <option value="technology">Technology</option>
-                                    <option value="finance">Finance</option>
-                                    <option value="healthcare">Healthcare</option>
-                                    <option value="education">Education</option>
-                                    <option value="manufacturing">Manufacturing</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Mentor specific fields -->
-                        <div class="role-specific-fields" id="mentorFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regExpertise" name="expertise" placeholder="Area of Expertise">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regExperience" name="experience" placeholder="Years of Experience">
-                            </div>
-                            <div class="form-group">
-                                <textarea id="regBio" name="bio" placeholder="Brief Bio (optional)" rows="3"></textarea>
-                            </div>
-                        </div>
-                        
-                        <!-- Trainer/Consultant specific fields -->
-                        <div class="role-specific-fields" id="trainerFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regSpecialization" name="specialization" placeholder="Training Specialization">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regCertifications" name="certifications" placeholder="Certifications (optional)">
-                            </div>
-                            <div class="form-group">
-                                <select id="regTrainingType" name="trainingType">
-                                    <option value="">Type of Training</option>
-                                    <option value="technical">Technical Skills</option>
-                                    <option value="soft-skills">Soft Skills</option>
-                                    <option value="leadership">Leadership</option>
-                                    <option value="industry-specific">Industry Specific</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Intern specific fields -->
-                        <div class="role-specific-fields" id="internFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regUniversity" name="university" placeholder="University/Institution">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regField" name="field" placeholder="Field of Study">
-                            </div>
-                            <div class="form-group">
-                                <select id="regInternshipType" name="internshipType">
-                                    <option value="">Type of Internship</option>
-                                    <option value="summer">Summer Internship</option>
-                                    <option value="part-time">Part-time</option>
-                                    <option value="full-time">Full-time</option>
-                                    <option value="virtual">Virtual</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- Community specific fields -->
-                        <div class="role-specific-fields" id="communityFields" style="display: none;">
-                            <div class="form-group">
-                                <select id="regCommunity" name="community">
-                                    <option value="">Select Community</option>
-                                    <optgroup label="🌍 Worldwide Communities">
-                                        <option value="tech-professionals">Tech Professionals</option>
-                                        <option value="entrepreneurs">Entrepreneurs</option>
-                                        <option value="job-seekers">Job Seekers Network</option>
-                                        <option value="recruiters">Recruiters Hub</option>
-                                        <option value="mentors">Mentors Circle</option>
-                                        <option value="students">Students & Graduates</option>
-                                        <option value="freelancers">Freelancers Guild</option>
-                                        <option value="startups">Startup Founders</option>
-                                        <option value="career-changers">Career Changers</option>
-                                        <option value="industry-experts">Industry Experts</option>
-                                    </optgroup>
-                                    <optgroup label="🇰🇪 Kenya-Based Organizations">
-                                        <option value="uan">UAN (United African Network)</option>
-                                        <option value="knm">KNM (Kenya National Movement)</option>
-                                        <option value="hindu-council">Hindu Council of Kenya</option>
-                                        <option value="kenya-chamber">Kenya National Chamber of Commerce</option>
-                                        <option value="rotary-kenya">Rotary Club of Kenya</option>
-                                        <option value="lions-kenya">Lions Club of Kenya</option>
-                                        <option value="red-cross-kenya">Kenya Red Cross Society</option>
-                                        <option value="youth-enterprise">Youth Enterprise Development Fund</option>
-                                        <option value="women-enterprise">Women Enterprise Fund</option>
-                                        <option value="kenya-association">Kenya Association of Manufacturers</option>
-                                        <option value="federation-employers">Federation of Kenya Employers</option>
-                                        <option value="kenya-private-sector">Kenya Private Sector Alliance</option>
-                                        <option value="kenya-ict">Kenya ICT Authority</option>
-                                        <option value="kenya-innovation">Kenya Innovation Agency</option>
-                                        <option value="kenya-startup">Kenya Startup Ecosystem</option>
-                                    </optgroup>
-                                    <optgroup label="🏢 Professional Bodies">
-                                        <option value="cpa-kenya">CPA Kenya</option>
-                                        <option value="icpak">ICPAK (Institute of Certified Public Accountants)</option>
-                                        <option value="kism">KISM (Kenya Institute of Supplies Management)</option>
-                                        <option value="kipm">KIPM (Kenya Institute of Project Management)</option>
-                                        <option value="kism">KISM (Kenya Institute of Management)</option>
-                                        <option value="kpsa">KPSA (Kenya Private Sector Alliance)</option>
-                                        <option value="kenya-bankers">Kenya Bankers Association</option>
-                                        <option value="kenya-insurance">Association of Kenya Insurers</option>
-                                        <option value="kenya-lawyers">Law Society of Kenya</option>
-                                        <option value="kenya-doctors">Kenya Medical Association</option>
-                                        <option value="kenya-engineers">Institution of Engineers of Kenya</option>
-                                        <option value="kenya-architects">Architectural Association of Kenya</option>
-                                    </optgroup>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regInterests" name="interests" placeholder="Areas of Interest">
-                            </div>
-                            <div class="form-group">
-                                <select id="regCommunityRole" name="communityRole">
-                                    <option value="">Community Role</option>
-                                    <option value="member">Active Member</option>
-                                    <option value="contributor">Contributor</option>
-                                    <option value="ambassador">Ambassador</option>
-                                    <option value="moderator">Moderator</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <!-- University specific fields -->
-                        <div class="role-specific-fields" id="universityFields" style="display: none;">
-                            <div class="form-group">
-                                <input type="text" id="regUniversityName" name="universityName" placeholder="University/Institution Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regDepartment" name="department" placeholder="Department/Program">
-                            </div>
-                            <div class="form-group">
-                                <select id="regUniversityType" name="universityType">
-                                    <option value="">Type of Institution</option>
-                                    <option value="public">Public University</option>
-                                    <option value="private">Private University</option>
-                                    <option value="college">College</option>
-                                    <option value="technical">Technical Institute</option>
-                                    <option value="vocational">Vocational School</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="regStudentCount" name="studentCount" placeholder="Approximate Student Population">
-                            </div>
-                        </div>
-                    </div>
-                    
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-bell"></i>
-                                Notify Me
-                            </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Success Modal -->
     <div id="successModal" class="modal">
@@ -2139,5 +1982,51 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="expo_landing.js"></script>
+    
+    <!-- Scroll Up Arrow Script -->
+    <script>
+        // Show/hide scroll up arrow based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollUpArrow = document.getElementById('scrollUpArrow');
+            const scrollUpBtn = document.querySelector('.scroll-up-btn');
+            
+            if (window.pageYOffset > 300) {
+                scrollUpArrow.classList.add('show');
+                // Add bounce animation after a delay
+                setTimeout(() => {
+                    scrollUpBtn.classList.add('animate');
+                }, 1000);
+            } else {
+                scrollUpArrow.classList.remove('show');
+                scrollUpBtn.classList.remove('animate');
+            }
+        });
+        
+        // Scroll to top function with custom easing
+        function scrollToTop() {
+            const startPosition = window.pageYOffset;
+            const startTime = performance.now();
+            const duration = 1200; // Slower duration (1.2 seconds)
+            
+            // Custom easing function (ease-in-out-cubic)
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+            
+            function animateScroll(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeInOutCubic(progress);
+                
+                window.scrollTo(0, startPosition * (1 - easedProgress));
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+            
+            requestAnimationFrame(animateScroll);
+        }
+    </script>
 </body>
 </html>
