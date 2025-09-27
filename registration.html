@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join AksharJobs - Registration</title>
+    <link rel="stylesheet" href="expo_landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Live Background Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 25s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .registration-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .registration-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .registration-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .registration-header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .registration-header p {
+            color: #718096;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(-2px);
+        }
+        
+        .role-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .role-option {
+            position: relative;
+        }
+        
+        .role-option input[type="radio"] {
+            display: none;
+        }
+        
+        .role-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid rgba(226, 232, 240, 0.5);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .role-option label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .role-option label:hover::before {
+            left: 100%;
+        }
+        
+        .role-option label:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            background: rgba(240, 244, 255, 0.9);
+        }
+        
+        .role-option input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .role-option label i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .role-option label h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .role-option label p {
+            font-size: 0.9rem;
+            color: #718096;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .dynamic-fields {
+            margin-top: 30px;
+        }
+        
+        .selected-role-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .selected-role-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .selected-role-icon {
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .role-specific-fields {
+            display: none;
+        }
+        
+        .role-specific-fields.show {
+            display: block;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .registration-card {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .registration-header h1 {
+                font-size: 2rem;
+            }
+            
+            .role-selection {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <div class="registration-card" data-aos="fade-up">
+            <a href="expo_landing.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            
+            <div class="registration-header">
+                <h1>Join AksharJobs</h1>
+                <p>Notify me when we launch - select your role to see relevant fields</p>
+            </div>
+            
+            <form id="registrationForm">
+                <div class="role-selection">
+                    <div class="role-option">
+                        <input type="radio" id="jobSeeker" name="role" value="job_seeker" required>
+                        <label for="jobSeeker">
+                            <i class="fas fa-search"></i>
+                            <h3>Job Seeker</h3>
+                            <p>Find your dream job with AI-powered matching and personalized career guidance</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="recruiter" name="role" value="recruiter" required>
+                        <label for="recruiter">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Recruiter</h3>
+                            <p>Find the best talent with advanced AI tools and streamlined hiring process</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="mentor" name="role" value="mentor" required>
+                        <label for="mentor">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Mentor</h3>
+                            <p>Guide and inspire the next generation of professionals in their career journey</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="trainer" name="role" value="trainer" required>
+                        <label for="trainer">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Trainer</h3>
+                            <p>Share your knowledge and create training programs to help others develop skills</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="consultant" name="role" value="consultant" required>
+                        <label for="consultant">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Consultant</h3>
+                            <p>Provide strategic guidance and specialized expertise to help organizations grow</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="volunteer" name="role" value="volunteer" required>
+                        <label for="volunteer">
+                            <i class="fas fa-heart"></i>
+                            <h3>Volunteer</h3>
+                            <p>Make a positive impact in your community through meaningful volunteer work</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="intern" name="role" value="intern" required>
+                        <label for="intern">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Intern</h3>
+                            <p>Gain valuable experience and skills through real-world projects and mentorship</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="community" name="role" value="community" required>
+                        <label for="community">
+                            <i class="fas fa-users"></i>
+                            <h3>Communities</h3>
+                            <p>Join our growing professional network and connect with like-minded individuals</p>
+                        </label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="university" name="role" value="university" required>
+                        <label for="university">
+                            <i class="fas fa-university"></i>
+                            <h3>Universities</h3>
+                            <p>Connect students with opportunities and bridge the gap between education and industry</p>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Dynamic form fields based on role selection -->
+                <div class="dynamic-fields" id="dynamicFields">
+                    <!-- Selected Role Display -->
+                    <div class="selected-role-display" id="selectedRoleDisplay" style="display: none;">
+                        <div class="selected-role-card">
+                            <i class="selected-role-icon"></i>
+                            <span class="selected-role-text">Selected: <strong></strong></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Common fields for all roles -->
+                    <div class="form-group">
+                        <input type="text" id="regName" name="name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="regEmail" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="regPhone" name="phone" placeholder="Phone Number" required>
+                    </div>
+                    
+                    <!-- Job Seeker specific fields -->
+                    <div class="role-specific-fields" id="jobSeekerFields">
+                        <div class="form-group">
+                            <input type="text" id="regExperience" name="experience" placeholder="Years of Experience">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regSkills" name="skills" placeholder="Key Skills (comma separated)">
+                        </div>
+                        <div class="form-group">
+                            <select id="regLocation" name="location">
+                                <option value="">Select Preferred Location</option>
+                                <option value="nairobi">Nairobi</option>
+                                <option value="mombasa">Mombasa</option>
+                                <option value="kisumu">Kisumu</option>
+                                <option value="nakuru">Nakuru</option>
+                                <option value="remote">Remote</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Recruiter specific fields -->
+                    <div class="role-specific-fields" id="recruiterFields">
+                        <div class="form-group">
+                            <input type="text" id="regCompany" name="company" placeholder="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regPosition" name="position" placeholder="Your Position">
+                        </div>
+                        <div class="form-group">
+                            <select id="regIndustry" name="industry">
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Mentor specific fields -->
+                    <div class="role-specific-fields" id="mentorFields">
+                        <div class="form-group">
+                            <input type="text" id="regExpertise" name="expertise" placeholder="Area of Expertise">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regExperience" name="experience" placeholder="Years of Experience">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="regBio" name="bio" placeholder="Brief Bio (optional)" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Trainer specific fields -->
+                    <div class="role-specific-fields" id="trainerFields">
+                        <div class="form-group">
+                            <input type="text" id="regSpecialization" name="specialization" placeholder="Training Specialization">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regCertifications" name="certifications" placeholder="Certifications (optional)">
+                        </div>
+                        <div class="form-group">
+                            <select id="regTrainingType" name="trainingType">
+                                <option value="">Type of Training</option>
+                                <option value="technical">Technical Skills</option>
+                                <option value="soft-skills">Soft Skills</option>
+                                <option value="leadership">Leadership</option>
+                                <option value="industry-specific">Industry Specific</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Consultant specific fields -->
+                    <div class="role-specific-fields" id="consultantFields">
+                        <div class="form-group">
+                            <input type="text" id="regConsultantSpecialization" name="consultantSpecialization" placeholder="Consulting Specialization">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regConsultantExperience" name="consultantExperience" placeholder="Years of Consulting Experience">
+                        </div>
+                        <div class="form-group">
+                            <select id="regConsultantType" name="consultantType">
+                                <option value="">Type of Consulting</option>
+                                <option value="strategy">Strategy Consulting</option>
+                                <option value="management">Management Consulting</option>
+                                <option value="technology">Technology Consulting</option>
+                                <option value="financial">Financial Consulting</option>
+                                <option value="hr">HR Consulting</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Volunteer specific fields -->
+                    <div class="role-specific-fields" id="volunteerFields">
+                        <div class="form-group">
+                            <input type="text" id="regVolunteerInterests" name="volunteerInterests" placeholder="Volunteer Interests">
+                        </div>
+                        <div class="form-group">
+                            <select id="regVolunteerAvailability" name="volunteerAvailability">
+                                <option value="">Availability</option>
+                                <option value="weekends">Weekends</option>
+                                <option value="weekdays">Weekdays</option>
+                                <option value="evenings">Evenings</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="regVolunteerMotivation" name="volunteerMotivation" placeholder="Why do you want to volunteer? (optional)" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Intern specific fields -->
+                    <div class="role-specific-fields" id="internFields">
+                        <div class="form-group">
+                            <input type="text" id="regUniversity" name="university" placeholder="University/Institution">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regField" name="field" placeholder="Field of Study">
+                        </div>
+                        <div class="form-group">
+                            <select id="regInternshipType" name="internshipType">
+                                <option value="">Type of Internship</option>
+                                <option value="summer">Summer Internship</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="virtual">Virtual</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Community specific fields -->
+                    <div class="role-specific-fields" id="communityFields">
+                        <div class="form-group">
+                            <select id="regCommunity" name="community">
+                                <option value="">Select Community</option>
+                                <optgroup label="🌍 Worldwide Communities">
+                                    <option value="tech-professionals">Tech Professionals</option>
+                                    <option value="entrepreneurs">Entrepreneurs</option>
+                                    <option value="job-seekers">Job Seekers Network</option>
+                                    <option value="recruiters">Recruiters Hub</option>
+                                    <option value="mentors">Mentors Circle</option>
+                                    <option value="students">Students & Graduates</option>
+                                    <option value="freelancers">Freelancers Guild</option>
+                                    <option value="startups">Startup Founders</option>
+                                    <option value="career-changers">Career Changers</option>
+                                    <option value="industry-experts">Industry Experts</option>
+                                </optgroup>
+                                <optgroup label="🇰🇪 Kenya-Based Organizations">
+                                    <option value="uan">UAN (United African Network)</option>
+                                    <option value="knm">KNM (Kenya National Movement)</option>
+                                    <option value="hindu-council">Hindu Council of Kenya</option>
+                                    <option value="kenya-chamber">Kenya National Chamber of Commerce</option>
+                                    <option value="rotary-kenya">Rotary Club of Kenya</option>
+                                    <option value="lions-kenya">Lions Club of Kenya</option>
+                                    <option value="red-cross-kenya">Kenya Red Cross Society</option>
+                                    <option value="youth-enterprise">Youth Enterprise Development Fund</option>
+                                    <option value="women-enterprise">Women Enterprise Fund</option>
+                                    <option value="kenya-association">Kenya Association of Manufacturers</option>
+                                    <option value="federation-employers">Federation of Kenya Employers</option>
+                                    <option value="kenya-private-sector">Kenya Private Sector Alliance</option>
+                                    <option value="kenya-ict">Kenya ICT Authority</option>
+                                    <option value="kenya-innovation">Kenya Innovation Agency</option>
+                                    <option value="kenya-startup">Kenya Startup Ecosystem</option>
+                                </optgroup>
+                                <optgroup label="🏢 Professional Bodies">
+                                    <option value="cpa-kenya">CPA Kenya</option>
+                                    <option value="icpak">ICPAK (Institute of Certified Public Accountants)</option>
+                                    <option value="kism">KISM (Kenya Institute of Supplies Management)</option>
+                                    <option value="kipm">KIPM (Kenya Institute of Project Management)</option>
+                                    <option value="kism">KISM (Kenya Institute of Management)</option>
+                                    <option value="kpsa">KPSA (Kenya Private Sector Alliance)</option>
+                                    <option value="kenya-bankers">Kenya Bankers Association</option>
+                                    <option value="kenya-insurance">Association of Kenya Insurers</option>
+                                    <option value="kenya-lawyers">Law Society of Kenya</option>
+                                    <option value="kenya-doctors">Kenya Medical Association</option>
+                                    <option value="kenya-engineers">Institution of Engineers of Kenya</option>
+                                    <option value="kenya-architects">Architectural Association of Kenya</option>
+                                </optgroup>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regInterests" name="interests" placeholder="Areas of Interest">
+                        </div>
+                        <div class="form-group">
+                            <select id="regCommunityRole" name="communityRole">
+                                <option value="">Community Role</option>
+                                <option value="member">Active Member</option>
+                                <option value="contributor">Contributor</option>
+                                <option value="ambassador">Ambassador</option>
+                                <option value="moderator">Moderator</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- University specific fields -->
+                    <div class="role-specific-fields" id="universityFields">
+                        <div class="form-group">
+                            <input type="text" id="regUniversityName" name="universityName" placeholder="University/Institution Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regDepartment" name="department" placeholder="Department/Program">
+                        </div>
+                        <div class="form-group">
+                            <select id="regUniversityType" name="universityType">
+                                <option value="">Type of Institution</option>
+                                <option value="public">Public University</option>
+                                <option value="private">Private University</option>
+                                <option value="college">College</option>
+                                <option value="technical">Technical Institute</option>
+                                <option value="vocational">Vocational School</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="regStudentCount" name="studentCount" placeholder="Approximate Student Population">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-bell"></i>
+                    Notify Me
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="expo_landing.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2px and 8px
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random starting position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 25 + 's';
+                
+                // Random animation duration
+                const duration = Math.random() * 10 + 20; // 20-30 seconds
+                particle.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Test Google Sheets connection
+            testGoogleSheetsConnection();
+        });
+        
+        // Test Google Sheets connection
+        async function testGoogleSheetsConnection() {
+            try {
+                const testUrl = `${REGISTRATION_WEBHOOK_URL}?test=connection&timestamp=${new Date().toISOString()}`;
+                console.log('Testing Google Sheets connection:', testUrl);
+                
+                // Open test URL in new tab
+                const testWindow = window.open(testUrl, '_blank');
+                setTimeout(() => {
+                    if (testWindow) {
+                        testWindow.close();
+                    }
+                }, 2000);
+                
+                console.log('Google Sheets connection test initiated');
+            } catch (error) {
+                console.error('Google Sheets connection test failed:', error);
+            }
+        }
+        
+        // Show success message with better UX
+        function showSuccessMessage(message, onContinue = null) {
+            // Create success modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                animation: modalSlideIn 0.3s ease-out;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="color: #10b981; font-size: 3rem; margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 style="color: #2d3748; margin-bottom: 15px; font-family: 'Poppins', sans-serif;">Success!</h2>
+                <p style="color: #718096; margin-bottom: 25px; line-height: 1.5;">${message}</p>
+                <button onclick="handleSuccessContinue()" style="
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    border: none;
+                    padding: 12px 30px;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    Continue to Referral
+                </button>
+            `;
+            
+            modal.className = 'success-modal';
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Add CSS animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes modalSlideIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px) scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0) scale(1);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Store the callback function globally for the button
+            window.handleSuccessContinue = function() {
+                if (modal.parentNode) {
+                    modal.remove();
+                }
+                if (onContinue) {
+                    onContinue();
+                }
+            };
+            
+            // Auto-close after 5 seconds
+            setTimeout(() => {
+                if (modal.parentNode) {
+                    modal.remove();
+                }
+                if (onContinue) {
+                    onContinue();
+                }
+            }, 5000);
+        }
+        
+        // Role selection functionality
+        const roleInputs = document.querySelectorAll('input[name="role"]');
+        const roleSpecificFields = document.querySelectorAll('.role-specific-fields');
+        const selectedRoleDisplay = document.getElementById('selectedRoleDisplay');
+        const selectedRoleIcon = document.querySelector('.selected-role-icon');
+        const selectedRoleText = document.querySelector('.selected-role-text strong');
+        
+        // Role mapping for display
+        const roleMapping = {
+            'job_seeker': { name: 'Job Seeker', icon: 'fas fa-search' },
+            'recruiter': { name: 'Recruiter', icon: 'fas fa-user-tie' },
+            'mentor': { name: 'Mentor', icon: 'fas fa-lightbulb' },
+            'trainer': { name: 'Trainer', icon: 'fas fa-chalkboard-teacher' },
+            'consultant': { name: 'Consultant', icon: 'fas fa-chart-line' },
+            'volunteer': { name: 'Volunteer', icon: 'fas fa-heart' },
+            'intern': { name: 'Intern', icon: 'fas fa-graduation-cap' },
+            'community': { name: 'Community', icon: 'fas fa-users' },
+            'university': { name: 'University', icon: 'fas fa-university' }
+        };
+        
+        roleInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                // Hide all role-specific fields
+                roleSpecificFields.forEach(field => {
+                    field.classList.remove('show');
+                });
+                
+                // Show selected role display
+                if (this.checked) {
+                    const roleData = roleMapping[this.value];
+                    selectedRoleIcon.className = `selected-role-icon ${roleData.icon}`;
+                    selectedRoleText.textContent = roleData.name;
+                    selectedRoleDisplay.style.display = 'block';
+                    
+                    // Show relevant fields
+                    const roleFields = document.getElementById(this.value + 'Fields');
+                    if (roleFields) {
+                        roleFields.classList.add('show');
+                    }
+                } else {
+                    selectedRoleDisplay.style.display = 'none';
+                }
+            });
+        });
+        
+        // Google Sheets integration
+        const REGISTRATION_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbybl1_G9qtjlXXn0Vjgl-anssjO-kqtKyy99DjtcYE/exec';
+        
+        // Helper: persist a local backup so nothing is lost
+        function saveRegistrationLocalBackup(reg) {
+            try {
+                const key = 'expo_registrations_backup_v1';
+                const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                existing.push({ ...reg, timestamp: new Date().toISOString() });
+                localStorage.setItem(key, JSON.stringify(existing));
+            } catch (_) {
+                // ignore storage issues silently
+            }
+        }
+        
+        // Send registration to Google Sheets
+        async function sendRegistration(data) {
+            // 1) Try Google Sheets via URL parameters (bypasses CORS completely)
+            if (REGISTRATION_WEBHOOK_URL && REGISTRATION_WEBHOOK_URL !== 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec') {
+                try {
+                    // Create URL with parameters
+                    const params = new URLSearchParams(data);
+                    const url = `${REGISTRATION_WEBHOOK_URL}?${params.toString()}`;
+                    
+                    console.log('Sending registration to:', url);
+                    console.log('Data being sent:', data);
+                    
+                    // Open in new tab (this will trigger doGet in Google Apps Script)
+                    const newWindow = window.open(url, '_blank');
+                    
+                    // Close the window after a short delay
+                    setTimeout(() => {
+                        if (newWindow) {
+                            newWindow.close();
+                        }
+                    }, 1000);
+                    
+                    return { success: true, method: 'google_sheets' };
+                } catch (error) {
+                    console.error('Google Sheets submission failed:', error);
+                }
+            }
+            
+            // 2) Fallback: Store locally
+            saveRegistrationLocalBackup(data);
+            return { success: true, method: 'local_backup' };
+        }
+        
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('.submit-button');
+            const originalText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitButton.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Validate required fields
+                if (!data.name || !data.email || !data.phone || !data.role) {
+                    throw new Error('Please fill in all required fields');
+                }
+                
+                // Add timestamp
+                data.timestamp = new Date().toISOString();
+                data.source = 'registration_page';
+                
+                // Collect role-specific data
+                const selectedRole = data.role;
+                const roleFields = document.getElementById(selectedRole + 'Fields');
+                if (roleFields) {
+                    const roleInputs = roleFields.querySelectorAll('input, select, textarea');
+                    roleInputs.forEach(input => {
+                        if (input.value.trim()) {
+                            data[input.name] = input.value;
+                        }
+                    });
+                }
+                
+                // Store user data for referral tracking
+                localStorage.setItem('aksharUserData', JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    role: data.role
+                }));
+                
+                // Send to Google Sheets
+                const result = await sendRegistration(data);
+                
+                // Show success message with better UX
+                showSuccessMessage('Thank you for registering! We will notify you when we launch.', () => {
+                    // Redirect to referral page after success
+                    window.location.href = 'expo_landing.html?from=registration#referral';
+                });
+                
+                // Reset form
+                this.reset();
+                selectedRoleDisplay.style.display = 'none';
+                roleSpecificFields.forEach(field => {
+                    field.classList.remove('show');
+                });
+                
+                console.log('Registration submitted successfully:', result);
+                
+            } catch (error) {
+                console.error('Registration submission failed:', error);
+                alert('Registration failed. Please try again or contact support.');
+            } finally {
+                // Reset button state
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
