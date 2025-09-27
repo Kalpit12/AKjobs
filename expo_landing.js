@@ -142,12 +142,16 @@ function closeSuccessModal() {
 window.addEventListener('click', function(event) {
     const registrationModal = document.getElementById('registrationModal');
     const successModal = document.getElementById('successModal');
+    const referralSharingModal = document.getElementById('referralSharingModal');
     
     if (event.target === registrationModal) {
         closeRegistrationModal();
     }
     if (event.target === successModal) {
         closeSuccessModal();
+    }
+    if (event.target === referralSharingModal) {
+        closeReferralSharingModal();
     }
 });
 
@@ -343,11 +347,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Role mapping for display
     const roleMapping = {
-        'job_seeker': { name: 'Job Seekers', icon: 'fas fa-user' },
-        'recruiter': { name: 'Recruiters', icon: 'fas fa-briefcase' },
-        'mentor': { name: 'Mentors', icon: 'fas fa-graduation-cap' },
-        'trainer': { name: 'Trainers/Consultants', icon: 'fas fa-chalkboard-teacher' },
-        'intern': { name: 'Interns', icon: 'fas fa-user-graduate' },
+        'job_seeker': { name: 'Job Seekers', icon: 'fas fa-search' },
+        'recruiter': { name: 'Recruiters', icon: 'fas fa-user-tie' },
+        'mentor': { name: 'Mentors', icon: 'fas fa-lightbulb' },
+        'trainer': { name: 'Trainers', icon: 'fas fa-chalkboard-teacher' },
+        'consultant': { name: 'Consultants', icon: 'fas fa-chart-line' },
+        'volunteer': { name: 'Volunteers', icon: 'fas fa-heart' },
+        'intern': { name: 'Interns', icon: 'fas fa-graduation-cap' },
         'community': { name: 'Communities', icon: 'fas fa-users' },
         'university': { name: 'Universities', icon: 'fas fa-university' }
     };
@@ -377,69 +383,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Registration form handling
-document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
-
-    // Normalize role for consistency
-    if (!data.role) {
-        alert('Please select your role.');
-        return;
-    }
-
-    // Basic validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!data.name || !emailRegex.test(data.email) || !data.phone) {
-        alert('Please provide a valid name, email, and phone number.');
-        return;
-    }
-    
-    // Loading state
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="loading"></span> Submitting...';
-    submitBtn.disabled = true;
-
-    // Collect all form data including role-specific fields
-    const payload = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        role: data.role
-    };
-
-    // Add role-specific data
-    const selectedRole = data.role;
-    const roleFields = document.getElementById(selectedRole + 'Fields');
-    if (roleFields) {
-        const roleInputs = roleFields.querySelectorAll('input, select, textarea');
-        roleInputs.forEach(input => {
-            if (input.value.trim()) {
-                payload[input.name] = input.value;
-            }
-        });
-    }
-
-    // Local backup immediately
-    saveRegistrationLocalBackup(payload);
-
-    sendRegistration(payload)
-        .finally(() => {
-            // Reset form and UI regardless of external services
-            this.reset();
-            // Hide all role-specific fields
-            document.querySelectorAll('.role-specific-fields').forEach(field => {
-                field.style.display = 'none';
-            });
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            closeRegistrationModal();
-            openSuccessModal('Thanks! We\'ll notify you when AksharJobs launches. You\'ll be among the first to know!');
-        });
-});
+// Registration form handling (moved to registration.html)
+// This code is no longer needed as the registration form is on a separate page
 
 // Magic Bento Card Effects
 function initMagicBentoEffects() {
@@ -592,36 +537,49 @@ function initRollingCardEffects() {
 // Initialize rolling card effects
 document.addEventListener('DOMContentLoaded', initRollingCardEffects);
 
-// Countdown Timer for October 20th, 2025
-function initCountdownTimer() {
-    const launchDate = new Date('October 20, 2025 00:00:00').getTime();
+// New Countdown Timer for October 20th, 2025
+function startCountdown() {
+    const targetDate = new Date('October 20, 2025 00:00:00').getTime();
     
-    function updateCountdown() {
+    function updateTimer() {
         const now = new Date().getTime();
-        const distance = launchDate - now;
+        const timeLeft = targetDate - now;
         
-        if (distance < 0) {
+        if (timeLeft > 0) {
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // Update the display
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        } else {
             // Launch date has passed
-            document.getElementById('days').innerHTML = '00';
-            document.getElementById('hours').innerHTML = '00';
-            document.getElementById('minutes').innerHTML = '00';
-            document.getElementById('seconds').innerHTML = '00';
-            return;
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+            
+            if (daysEl) daysEl.textContent = '00';
+            if (hoursEl) hoursEl.textContent = '00';
+            if (minutesEl) minutesEl.textContent = '00';
+            if (secondsEl) secondsEl.textContent = '00';
         }
-        
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
     }
     
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // Start the countdown immediately
+    updateTimer();
+    
+    // Update every second
+    setInterval(updateTimer, 1000);
 }
 
 // Sticky CTA Bar
@@ -647,7 +605,7 @@ function initStickyCTA() {
 // Social Share Functions
 function shareOnTwitter() {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('🚀 Excited about AksharJobs - AI-powered job portal launching October 20th! Join the waitlist now! #AksharJobs #AI #JobPortal #Global');
+    const text = encodeURIComponent('🚀 Excited about AksharJobs - AI-powered job portal launching October 20th, 2025! Join the waitlist now! #AksharJobs #AI #JobPortal #Global');
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&utm_source=twitter&utm_medium=social&utm_campaign=expo2025`, '_blank');
 }
 
@@ -659,7 +617,7 @@ function shareOnLinkedIn() {
 }
 
 function shareOnWhatsApp() {
-    const text = encodeURIComponent('🚀 Check out AksharJobs - AI-powered job portal launching October 20th! Join the waitlist: ');
+    const text = encodeURIComponent('🚀 Check out AksharJobs - AI-powered job portal launching October 20th, 2025! Join the waitlist: ');
     const url = encodeURIComponent(window.location.href);
     window.open(`https://wa.me/?text=${text}${url}&utm_source=whatsapp&utm_medium=social&utm_campaign=expo2025`, '_blank');
 }
@@ -682,6 +640,9 @@ function copyReferralCode() {
         referralCode.style.color = 'white';
         referralCode.style.borderColor = '#10b981';
         
+        // Track coin earning for copying
+        trackReferralShare('copy');
+        
         setTimeout(() => {
             referralCode.textContent = originalText;
             referralCode.style.background = '#f8fafc';
@@ -697,8 +658,496 @@ function copyReferralCode() {
         document.execCommand('copy');
         document.body.removeChild(textArea);
         
+        // Track coin earning for copying
+        trackReferralShare('copy');
+        
         alert('Referral code copied to clipboard!');
     });
+}
+
+// Referral Sharing Functions
+function shareReferralViaWhatsApp() {
+    const referralCode = 'AKSHAR2025';
+    const message = `🚀 Join me on AksharJobs - the revolutionary AI-powered job portal launching October 20th, 2025!
+
+✨ Features:
+• AI-powered job matching with 75.3% accuracy
+• Multilingual support (English, Hindi, Gujarati, Swahili)
+• Cultural intelligence for global opportunities
+• Advanced analytics and insights
+
+🎁 Use my referral code: ${referralCode}
+Get exclusive early access and premium benefits!
+
+Join the waitlist now: ${window.location.href}
+
+#AksharJobs #AI #JobPortal #CareerOpportunities`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+    
+    // Track referral share
+    trackReferralShare('whatsapp');
+}
+
+function shareReferralViaEmail() {
+    const referralCode = 'AKSHAR2025';
+    const subject = 'Join AksharJobs - AI-Powered Job Portal (Referral Code Inside!)';
+    const body = `Hi there!
+
+I wanted to share something exciting with you - AksharJobs, a revolutionary AI-powered job portal that's launching on October 20th, 2025!
+
+🚀 What makes AksharJobs special:
+• AI-powered job matching with 75.3% accuracy
+• Multilingual support (English, Hindi, Gujarati, Swahili)
+• Cultural intelligence for global opportunities
+• Advanced analytics and career insights
+• Personalized career guidance
+
+🎁 Special Offer:
+Use my referral code "${referralCode}" to get:
+• Early access to the platform
+• Premium features for free
+• Exclusive career opportunities
+
+Join the waitlist here: ${window.location.href}
+
+This is going to revolutionize how we find jobs and talent. Don't miss out on being part of the future of recruitment!
+
+Best regards,
+[Your Name]`;
+    
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
+    
+    // Track referral share
+    trackReferralShare('email');
+}
+
+function shareReferralViaSMS() {
+    const referralCode = 'AKSHAR2025';
+    const message = `🚀 Join AksharJobs - AI job portal launching Oct 20, 2025! Use my code ${referralCode} for early access & premium benefits. Join: ${window.location.href}`;
+    
+    const smsLink = `sms:?body=${encodeURIComponent(message)}`;
+    window.open(smsLink, '_blank');
+    
+    // Track referral share
+    trackReferralShare('sms');
+}
+
+function shareReferralViaLinkedIn() {
+    const referralCode = 'AKSHAR2025';
+    const title = 'AksharJobs - Revolutionary AI-Powered Job Portal';
+    const summary = `🚀 Excited to share AksharJobs - the revolutionary AI-powered job portal launching October 20th, 2025!
+
+✨ Key Features:
+• AI-powered job matching with 75.3% accuracy
+• Multilingual support (English, Hindi, Gujarati, Swahili)
+• Cultural intelligence for global opportunities
+• Advanced analytics and career insights
+
+🎁 Special Offer:
+Use my referral code "${referralCode}" to get early access and premium benefits!
+
+This platform is going to revolutionize recruitment and career development. Join the waitlist and be part of the future!
+
+#AksharJobs #AI #JobPortal #CareerOpportunities #Innovation`;
+    
+    const url = encodeURIComponent(window.location.href);
+    const encodedTitle = encodeURIComponent(title);
+    const encodedSummary = encodeURIComponent(summary);
+    
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${encodedTitle}&summary=${encodedSummary}`, '_blank');
+    
+    // Track referral share
+    trackReferralShare('linkedin');
+}
+
+function shareReferralViaTwitter() {
+    const referralCode = 'AKSHAR2025';
+    const text = `🚀 Join AksharJobs - revolutionary AI-powered job portal launching Oct 20, 2025! Use my code ${referralCode} for early access & premium benefits. #AksharJobs #AI #JobPortal`;
+    const url = encodeURIComponent(window.location.href);
+    const encodedText = encodeURIComponent(text);
+    
+    window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${url}`, '_blank');
+    
+    // Track referral share
+    trackReferralShare('twitter');
+}
+
+function shareReferralViaFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    
+    // Track referral share
+    trackReferralShare('facebook');
+}
+
+function shareReferralViaTelegram() {
+    const referralCode = 'AKSHAR2025';
+    const message = `🚀 Join AksharJobs - AI-powered job portal launching Oct 20, 2025! Use my code ${referralCode} for early access & premium benefits. Join: ${window.location.href}`;
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodedMessage}`, '_blank');
+    
+    // Track referral share
+    trackReferralShare('telegram');
+}
+
+// Universal sharing function
+function shareReferralViaNative() {
+    if (navigator.share) {
+        const referralCode = 'AKSHAR2025';
+        navigator.share({
+            title: 'AksharJobs - AI-Powered Job Portal',
+            text: `🚀 Join AksharJobs - revolutionary AI-powered job portal launching October 20th, 2025! Use my referral code ${referralCode} for early access and premium benefits!`,
+            url: window.location.href
+        }).then(() => {
+            trackReferralShare('native');
+        }).catch((error) => {
+            console.log('Error sharing:', error);
+            // Fallback to copy to clipboard
+            copyReferralCode();
+        });
+    } else {
+        // Fallback to copy to clipboard
+        copyReferralCode();
+    }
+}
+
+// AksharCoins system
+const AKSHAR_COINS_REWARDS = {
+    'whatsapp': 5,      // High engagement platform
+    'email': 3,         // Professional sharing
+    'sms': 2,           // Direct messaging
+    'linkedin': 4,      // Professional network
+    'twitter': 3,       // Social media
+    'facebook': 2,      // Social media
+    'telegram': 3,      // Messaging app
+    'native': 2,        // Device sharing
+    'copy': 1           // Copy to clipboard
+};
+
+// Get coins earned for platform
+function getCoinsForPlatform(platform) {
+    return AKSHAR_COINS_REWARDS[platform] || 1;
+}
+
+// Update user's coin balance
+function updateUserCoins(coinsEarned) {
+    const currentCoins = parseInt(localStorage.getItem('aksharCoins') || '0');
+    const newTotal = currentCoins + coinsEarned;
+    localStorage.setItem('aksharCoins', newTotal.toString());
+    updateCoinDisplay();
+    return newTotal;
+}
+
+// Update coin display in UI
+function updateCoinDisplay() {
+    const currentCoins = parseInt(localStorage.getItem('aksharCoins') || '0');
+    const coinElements = document.querySelectorAll('.akshar-coins-display');
+    coinElements.forEach(element => {
+        element.textContent = currentCoins;
+    });
+    
+    // Update coin display in referral modal
+    const modalCoinDisplay = document.getElementById('modalCoinDisplay');
+    if (modalCoinDisplay) {
+        modalCoinDisplay.textContent = currentCoins;
+    }
+}
+
+// Update registration status display
+function updateRegistrationStatus() {
+    const userData = JSON.parse(localStorage.getItem('aksharUserData') || '{}');
+    const statusElement = document.getElementById('registrationStatus');
+    
+    if (statusElement) {
+        if (userData.name && userData.email) {
+            statusElement.style.display = 'block';
+        } else {
+            statusElement.style.display = 'none';
+        }
+    }
+}
+
+// Show coin earning notification
+function showCoinEarnedNotification(coinsEarned, platform) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'coin-notification';
+    notification.innerHTML = `
+        <div class="coin-notification-content">
+            <div class="coin-icon">🪙</div>
+            <div class="coin-text">
+                <div class="coin-earned">+${coinsEarned} AksharCoins</div>
+                <div class="coin-platform">Shared via ${platform}</div>
+            </div>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Track referral shares for analytics and Google Sheets
+function trackReferralShare(platform) {
+    // Get user information from localStorage (from registration)
+    const userData = JSON.parse(localStorage.getItem('aksharUserData') || '{}');
+    
+    // Calculate coins earned
+    const coinsEarned = getCoinsForPlatform(platform);
+    
+    // Store in localStorage for analytics
+    const shareData = {
+        platform: platform,
+        timestamp: new Date().toISOString(),
+        referralCode: 'AKSHAR2025',
+        url: window.location.href,
+        userData: userData,
+        coinsEarned: coinsEarned
+    };
+    
+    try {
+        const existingShares = JSON.parse(localStorage.getItem('aksharReferralShares') || '[]');
+        existingShares.push(shareData);
+        localStorage.setItem('aksharReferralShares', JSON.stringify(existingShares));
+        
+        // Update referral count
+        const currentCount = parseInt(localStorage.getItem('aksharReferralCount') || '0');
+        localStorage.setItem('aksharReferralCount', (currentCount + 1).toString());
+        updateReferralCount();
+        
+        // Update coins
+        const newTotalCoins = updateUserCoins(coinsEarned);
+        
+        // Show coin notification
+        showCoinEarnedNotification(coinsEarned, platform);
+        
+        // Send to Google Sheets if user data is available
+        if (userData.name && userData.email && userData.phone && userData.role) {
+            sendReferralToGoogleSheets({
+                type: 'referral',
+                referrerName: userData.name,
+                referrerEmail: userData.email,
+                referrerPhone: userData.phone,
+                referrerRole: userData.role,
+                platform: platform,
+                referralCode: 'AKSHAR2025'
+            });
+        } else {
+            console.log('User data not available for referral tracking. Please register first.');
+        }
+        
+        console.log(`Referral shared via ${platform}:`, shareData);
+        console.log(`Earned ${coinsEarned} AksharCoins. Total: ${newTotalCoins}`);
+    } catch (error) {
+        console.error('Error tracking referral share:', error);
+    }
+}
+
+// Function to send referral data to Google Sheets
+async function sendReferralToGoogleSheets(data) {
+    if (REGISTRATION_WEBHOOK_URL && REGISTRATION_WEBHOOK_URL !== 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec') {
+        try {
+            // Create URL with parameters
+            const params = new URLSearchParams(data);
+            const url = `${REGISTRATION_WEBHOOK_URL}?${params.toString()}`;
+            
+            console.log('Sending referral tracking to:', url);
+            console.log('Referral data being sent:', data);
+            
+            // Open in new tab (this will trigger doGet in Google Apps Script)
+            window.open(url, '_blank');
+            
+            console.log('Referral tracking data submitted to Google Sheets');
+        } catch (err) {
+            console.warn('Google Sheets referral tracking failed:', err);
+        }
+    }
+}
+
+// Show referral sharing modal
+// Function to check user registration status
+async function checkUserRegistrationStatus(email) {
+    if (!REGISTRATION_WEBHOOK_URL || REGISTRATION_WEBHOOK_URL === 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec') {
+        console.log('Registration webhook not configured, using localStorage only');
+        const userData = JSON.parse(localStorage.getItem('aksharUserData') || '{}');
+        return {
+            registered: !!(userData.name && userData.email),
+            userData: userData
+        };
+    }
+    
+    try {
+        const response = await fetch(`${REGISTRATION_WEBHOOK_URL}?type=check_registration&email=${encodeURIComponent(email)}`);
+        const result = await response.json();
+        
+        if (result.registered && result.userData) {
+            // Update localStorage with fresh data from server
+            localStorage.setItem('aksharUserData', JSON.stringify(result.userData));
+        }
+        
+        return result;
+    } catch (error) {
+        console.error('Error checking registration status:', error);
+        // Fallback to localStorage
+        const userData = JSON.parse(localStorage.getItem('aksharUserData') || '{}');
+        return {
+            registered: !!(userData.name && userData.email),
+            userData: userData
+        };
+    }
+}
+
+async function showReferralSharingModal() {
+    // Get user email from localStorage
+    const userData = JSON.parse(localStorage.getItem('aksharUserData') || '{}');
+    
+    if (!userData.email) {
+        alert('Please register first to start referring others!');
+        openRegistrationModal();
+        return;
+    }
+    
+    // Check registration status with server
+    const registrationStatus = await checkUserRegistrationStatus(userData.email);
+    
+    if (!registrationStatus.registered) {
+        alert('Registration not found! Please complete your registration first.');
+        openRegistrationModal();
+        return;
+    }
+    
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('referralSharingModal');
+    if (!modal) {
+        modal = createReferralSharingModal();
+        document.body.appendChild(modal);
+    }
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Create referral sharing modal
+function createReferralSharingModal() {
+    const modal = document.createElement('div');
+    modal.id = 'referralSharingModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Share Your Referral Code</h2>
+                <p>Invite friends and get exclusive benefits!</p>
+                <span class="close" onclick="closeReferralSharingModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="referral-code-display">
+                    <div class="referral-code-box" onclick="copyReferralCode()">
+                        <span id="referralCode">AKSHAR2025</span>
+                        <small>Click to copy (+1 coin)</small>
+                    </div>
+                    <div class="coin-balance-display">
+                        <span class="coin-icon">🪙</span>
+                        <span class="coin-text">Your AksharCoins: <span id="modalCoinDisplay" class="akshar-coins-display">0</span></span>
+                    </div>
+                </div>
+                
+                <div class="sharing-options">
+                    <h3>Share via:</h3>
+                    <div class="sharing-buttons">
+                        <button class="share-btn whatsapp" onclick="shareReferralViaWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                            <small>+5 coins</small>
+                        </button>
+                        <button class="share-btn email" onclick="shareReferralViaEmail()">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                            <small>+3 coins</small>
+                        </button>
+                        <button class="share-btn sms" onclick="shareReferralViaSMS()">
+                            <i class="fas fa-sms"></i>
+                            <span>SMS</span>
+                            <small>+2 coins</small>
+                        </button>
+                        <button class="share-btn linkedin" onclick="shareReferralViaLinkedIn()">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                            <small>+4 coins</small>
+                        </button>
+                        <button class="share-btn twitter" onclick="shareReferralViaTwitter()">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                            <small>+3 coins</small>
+                        </button>
+                        <button class="share-btn facebook" onclick="shareReferralViaFacebook()">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                            <small>+2 coins</small>
+                        </button>
+                        <button class="share-btn telegram" onclick="shareReferralViaTelegram()">
+                            <i class="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                            <small>+3 coins</small>
+                        </button>
+                        <button class="share-btn native" onclick="shareReferralViaNative()">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Share</span>
+                            <small>+2 coins</small>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="referral-benefits">
+                    <h3>Earn AksharCoins & Unlock Benefits:</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <span class="benefit-number">🪙</span>
+                            <span class="benefit-text">Share = Earn Coins</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-number">50</span>
+                            <span class="benefit-text">Coins = Early Access</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-number">100</span>
+                            <span class="benefit-text">Coins = Free Premium</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-number">200</span>
+                            <span class="benefit-text">Coins = VIP Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return modal;
+}
+
+// Close referral sharing modal
+function closeReferralSharingModal() {
+    const modal = document.getElementById('referralSharingModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 // Update referral count from localStorage
@@ -707,12 +1156,176 @@ function updateReferralCount() {
     document.getElementById('referralCount').textContent = count;
 }
 
+// QR Code Registration System
+let currentQRCode = null;
+
+// Generate QR Code for registration
+function generateQRCode() {
+    const qrDisplay = document.getElementById('qrCodeDisplay');
+    
+    // Create registration URL with current page URL
+    const registrationURL = window.location.origin + window.location.pathname + '#register';
+    
+    // Clear existing content
+    qrDisplay.innerHTML = '';
+    
+    // Create loading state
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'qr-loading';
+    loadingDiv.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div class="spinner" style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Generating QR Code...</p>
+        </div>
+    `;
+    qrDisplay.appendChild(loadingDiv);
+    
+    // Add spinner animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Generate QR Code using QR Server API
+    setTimeout(() => {
+        const qrCodeURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(registrationURL)}`;
+        
+        const qrImg = document.createElement('img');
+        qrImg.src = qrCodeURL;
+        qrImg.alt = 'Registration QR Code';
+        qrImg.style.maxWidth = '180px';
+        qrImg.style.maxHeight = '180px';
+        qrImg.style.borderRadius = '10px';
+        
+        qrImg.onload = function() {
+            qrDisplay.innerHTML = '';
+            qrDisplay.appendChild(qrImg);
+            currentQRCode = qrCodeURL;
+            
+            // Show success message
+            showQRSuccessMessage();
+        };
+        
+        qrImg.onerror = function() {
+            qrDisplay.innerHTML = `
+                <div style="text-align: center; color: #ef4444;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <p>Failed to generate QR Code</p>
+                    <button onclick="generateQRCode()" style="background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">
+                        Try Again
+                    </button>
+                </div>
+            `;
+        };
+    }, 1000);
+}
+
+// Download QR Code
+function downloadQRCode() {
+    if (!currentQRCode) {
+        alert('Please generate a QR Code first!');
+        return;
+    }
+    
+    // Create download link
+    const link = document.createElement('a');
+    link.href = currentQRCode;
+    link.download = 'aksharjobs-registration-qr.png';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Show download success message
+    showNotification('QR Code downloaded successfully!', 'success');
+}
+
+// Show QR Code success message
+function showQRSuccessMessage() {
+    const notification = document.createElement('div');
+    notification.className = 'qr-success-notification';
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px; background: #10b981; color: white; padding: 12px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+            <i class="fas fa-check-circle"></i>
+            <span>QR Code generated successfully!</span>
+        </div>
+    `;
+    
+    // Position notification
+    notification.style.position = 'fixed';
+    notification.style.top = '20px';
+    notification.style.right = '20px';
+    notification.style.zIndex = '10000';
+    notification.style.transform = 'translateX(400px)';
+    notification.style.opacity = '0';
+    notification.style.transition = 'all 0.3s ease';
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+        notification.style.opacity = '1';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Auto-generate QR Code on page load
+function initQRCode() {
+    // Generate QR Code automatically when page loads
+    setTimeout(() => {
+        generateQRCode();
+    }, 2000);
+}
+
 // Initialize all new features
 document.addEventListener('DOMContentLoaded', function() {
-    initCountdownTimer();
+    console.log('DOM Content Loaded - Initializing features...');
+    startCountdown();
     initStickyCTA();
     updateReferralCount();
+    updateCoinDisplay();
+    updateRegistrationStatus();
+    initQRCode();
+    
+    // Check if user came from registration
+    checkRegistrationRedirect();
 });
+
+// Check if user came from registration and show welcome message
+function checkRegistrationRedirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromRegistration = urlParams.get('from') === 'registration';
+    
+    if (fromRegistration) {
+        // Show welcome message
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        if (welcomeMessage) {
+            welcomeMessage.style.display = 'block';
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                welcomeMessage.style.display = 'none';
+            }, 10000);
+        }
+        
+        // Clean up URL
+        const newUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+    }
+}
 
 // Typing animation for hero title
 function typeWriter(element, text, speed = 100) {
